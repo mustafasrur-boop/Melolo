@@ -540,6 +540,86 @@
   </div>
 </div>
 
+<!-- FRIENDS -->
+<div class="page" id="page-friends">
+  <div style="max-width:600px;margin:0 auto;padding:28px 20px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+      <button onclick="goto('landing')" style="background:none;border:1.5px solid var(--border);border-radius:100px;padding:6px 14px;font-family:Syne,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;color:var(--muted)">← back</button>
+      <h2 style="font-size:1.2rem;font-weight:800">friends 👥</h2>
+      <div id="friends-online-count" style="font-size:0.78rem;color:#44aa66;margin-left:auto"></div>
+    </div>
+
+    <!-- add friend -->
+    <div style="background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px">
+      <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px">add friend</div>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="friend-add-input" placeholder="enter username..." maxlength="20"
+          style="flex:1;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:Syne,sans-serif;font-size:0.88rem;background:var(--bg);color:var(--fg);outline:none"
+          onkeydown="if(event.key==='Enter')sendFriendRequest()" />
+        <button onclick="sendFriendRequest()" style="padding:9px 16px;background:var(--fg);color:var(--bg);border:none;border-radius:8px;font-family:Syne,sans-serif;font-weight:700;cursor:pointer">send request</button>
+      </div>
+    </div>
+
+    <!-- pending requests -->
+    <div id="friend-requests-section" style="display:none;background:var(--card);border:1.5px solid #e8c84a44;border-radius:14px;padding:18px;margin-bottom:16px">
+      <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#e8c84a;margin-bottom:10px">pending requests</div>
+      <div id="friend-requests-list" style="display:flex;flex-direction:column;gap:8px"></div>
+    </div>
+
+    <!-- friends list -->
+    <div style="background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:18px">
+      <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px">my friends</div>
+      <div id="friends-list" style="display:flex;flex-direction:column;gap:8px">
+        <div style="color:var(--muted);font-size:0.85rem">loading...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="page" id="page-profile">
+  <div style="max-width:480px;margin:0 auto;padding:40px 20px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px">
+      <button onclick="goto('landing')" style="background:none;border:1.5px solid var(--border);border-radius:100px;padding:6px 14px;font-family:Syne,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;color:var(--muted)">← back</button>
+      <h2 style="font-size:1.3rem;font-weight:800">my profile ✨</h2>
+    </div>
+    <!-- current user info -->
+    <div style="background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px">
+      <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px">account</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.4rem">🦕</div>
+        <div>
+          <div id="profile-username-display" style="font-size:1.1rem;font-weight:800"></div>
+          <div id="profile-score-display" style="font-size:0.82rem;color:var(--muted)"></div>
+        </div>
+      </div>
+      <!-- change username -->
+      <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">change username</div>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="new-username-input" placeholder="new username..." maxlength="20"
+          style="flex:1;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:Syne,sans-serif;font-size:0.88rem;background:var(--bg);color:var(--fg);outline:none"
+          onkeydown="if(event.key==='Enter')changeUsername()" />
+        <button onclick="changeUsername()" style="padding:9px 16px;background:var(--fg);color:var(--bg);border:none;border-radius:8px;font-family:Syne,sans-serif;font-weight:700;cursor:pointer;font-size:0.88rem">save</button>
+      </div>
+      <div id="username-change-error" style="font-size:0.8rem;color:var(--accent2);margin-top:6px;display:none"></div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:6px">usernames must be 3-20 characters, letters and numbers only. changing your username keeps all your scores.</div>
+    </div>
+    <!-- change password -->
+    <div style="background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px">
+      <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px">change password</div>
+      <input type="password" id="new-pass-input" placeholder="new password (min 6 chars)..." maxlength="40"
+        style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:Syne,sans-serif;font-size:0.88rem;background:var(--bg);color:var(--fg);outline:none;box-sizing:border-box;margin-bottom:8px" />
+      <button onclick="changePassword()" style="padding:9px 16px;background:var(--fg);color:var(--bg);border:none;border-radius:8px;font-family:Syne,sans-serif;font-weight:700;cursor:pointer;font-size:0.88rem">update password</button>
+    </div>
+    <!-- danger zone -->
+    <div style="background:var(--card);border:1.5px solid #e8623a44;border-radius:16px;padding:24px">
+      <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--accent2);margin-bottom:14px">danger zone</div>
+      <button onclick="confirmDeleteOwnAccount()" style="padding:9px 16px;background:#e8623a;color:#fff;border:none;border-radius:8px;font-family:Syne,sans-serif;font-weight:700;cursor:pointer;font-size:0.88rem">delete my account</button>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:6px">permanently deletes your account and all scores. cannot be undone.</div>
+    </div>
+  </div>
+</div>
+
 <!-- GAME -->
 <div class="page" id="page-game">
   <div class="game-wrap">
@@ -812,6 +892,21 @@
           </div>
         </div>
       </div>
+      <div class="game-card" onclick="goto('rocket')">
+        <div class="game-card-banner" style="background:#000833">
+          <span class="card-emoji">🚗</span>
+          <span class="card-emoji2 a" style="color:#ff4400">🔥</span>
+          <span class="card-emoji2 b" style="color:#44aaff">⚽</span>
+        </div>
+        <div class="game-card-body">
+          <h3>rocket league</h3>
+          <p>drive your rocket car, hit the ball into the goal. boost, drift and outplay the AI. 2 minute matches.</p>
+          <div class="game-card-footer">
+            <span class="game-tag">sports · cars</span>
+            <button class="play-btn" style="background:#0044cc">play →</button>
+          </div>
+        </div>
+      </div>
       <div class="game-card" onclick="goto('edu')">
         <div class="game-card-banner" style="background:#0a1a3a">
           <span class="card-emoji">📚</span>
@@ -857,6 +952,38 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROCKET LEAGUE -->
+<div class="page" id="page-rocket">
+  <div class="game-wrap">
+    <div class="game-header">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button onclick="goto('arcade')" style="background:none;border:1.5px solid var(--border);border-radius:100px;padding:6px 14px;font-family:Syne,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;color:var(--muted)">← games</button>
+        <h2>rocket league 🚗</h2>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val" id="rl-you">0</div><div class="stat-lbl">you</div></div>
+        <div class="stat"><div class="stat-val" id="rl-ai">0</div><div class="stat-lbl">AI</div></div>
+        <div class="stat"><div class="stat-val" id="rl-time">120</div><div class="stat-lbl">time</div></div>
+        <div class="stat"><div class="stat-val" id="rl-boost">100</div><div class="stat-lbl">boost</div></div>
+      </div>
+    </div>
+    <canvas id="rl-canvas" width="820" height="500" style="width:100%;border-radius:16px;display:block;background:#1a1a2a"></canvas>
+    <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center">
+      <button class="ctrl-btn start" id="rl-start-btn" onclick="startRocket()" style="background:#0044cc;border-color:#0044cc">start game</button>
+      <button class="ctrl-btn" onclick="goto('arcade')">all games</button>
+      <button class="ctrl-btn" onclick="createServer('rocket')">🎮 create server</button>
+      <input id="rl-scode" type="text" maxlength="5" placeholder="code..." style="width:80px;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:Space Mono,monospace;font-size:0.9rem;text-transform:uppercase;background:var(--card);color:var(--fg);outline:none" onkeydown="if(event.key==='Enter')joinServer(this.value)" />
+      <button class="ctrl-btn" onclick="joinServer(document.getElementById('rl-scode').value)">join</button>
+      <div class="server-code-display" style="display:none;background:var(--fg);color:var(--bg);padding:5px 12px;border-radius:8px;font-weight:700;font-family:Space Mono,monospace;font-size:0.85rem;letter-spacing:0.1em"></div>
+    </div>
+    <div class="game-info">
+      <div class="info-item">⬆️⬇️⬅️➡️ <strong>WASD</strong> to drive</div>
+      <div class="info-item">⏺️ <strong>Space</strong> to boost</div>
+      <div class="info-item">🎯 <strong>hit the ball</strong> into the enemy goal</div>
     </div>
   </div>
 </div>
@@ -1541,20 +1668,17 @@
 
 <!-- CHAT -->
 <div class="page" id="page-chat">
-  <div style="max-width:700px;margin:0 auto;padding:24px;height:calc(100vh - 120px);display:flex;flex-direction:column">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-      <button onclick="goto('landing')" style="background:none;border:1.5px solid var(--border);border-radius:100px;padding:6px 14px;font-family:Syne,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;color:var(--muted)">← back</button>
-      <h2 style="font-size:1.2rem;font-weight:800">💬 global chat</h2>
-      <span id="chat-online" style="font-size:0.78rem;color:#44aa66;margin-left:auto">● live</span>
+  <div style="max-width:600px;margin:0 auto;padding:16px;height:calc(100vh - 80px);display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <button onclick="goto('landing')" style="background:none;border:1.5px solid var(--border);border-radius:100px;padding:4px 12px;font-family:Syne,sans-serif;font-size:0.78rem;font-weight:700;cursor:pointer;color:var(--muted)">← back</button>
+      <h2 style="font-size:1rem;font-weight:800">💬 global chat</h2>
+      <span style="font-size:0.72rem;color:#44aa66;margin-left:auto">● live</span>
     </div>
-    <div id="chat-messages" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:12px">
-      <div style="text-align:center;color:var(--muted);font-size:0.82rem">loading messages...</div>
+    <div id="chat-messages" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:4px;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px"></div>
+    <div style="display:flex;gap:6px">
+      <input id="chat-input" type="text" maxlength="200" placeholder="message..." style="flex:1;padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:Syne,sans-serif;font-size:0.85rem;background:var(--card);color:var(--fg);outline:none" onkeydown="if(event.key==='Enter')sendChatMsg()" />
+      <button onclick="sendChatMsg()" style="padding:8px 14px;background:var(--fg);color:var(--bg);border:none;border-radius:8px;font-family:Syne,sans-serif;font-weight:700;cursor:pointer;font-size:0.85rem">send</button>
     </div>
-    <div style="display:flex;gap:8px">
-      <input id="chat-input" type="text" maxlength="200" placeholder="say something... (enter to send)" style="flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:Syne,sans-serif;font-size:0.9rem;background:var(--card);color:var(--fg);outline:none" onkeydown="if(event.key==='Enter')sendChatMsg()" />
-      <button onclick="sendChatMsg()" style="padding:10px 18px;background:var(--fg);color:var(--bg);border:none;border-radius:10px;font-family:Syne,sans-serif;font-weight:700;cursor:pointer;font-size:0.9rem">send</button>
-    </div>
-    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;text-align:center">be kind 💚 · messages are visible to everyone · admins can delete messages</div>
   </div>
 </div>
 
@@ -1929,6 +2053,8 @@ const DINOS = [
 
 /* ---- ROUTING ---- */
 function goto(page) {
+  currentPage = page;
+  if (currentUser) updatePresence().catch(()=>{});
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
   if (page === 'leaderboard') renderLeaderboard('all');
@@ -1950,12 +2076,16 @@ function goto(page) {
   if (page !== 'lasertag') stopLaserTag();
   if (page !== 'minecraft') stopMinecraft();
   if (page !== 'jurassic') stopJurassic();
+  if (page !== 'rocket') stopRocket();
   if (page === 'edu') renderEduGame();
   if (page === 'fishing') initFishing();
   if (page === 'community') renderCommunity();
+  if (page === 'profile') loadProfilePage();
+  if (page === 'friends') loadFriendsPage();
+  else { clearInterval(friendsPollInterval); }
   if (page === 'chat') startChatPoll();
   else stopChatPoll();
-  const onGame = page === 'game' || page === 'soccer' || page === 'fruitninja' || page === 'reaction' || page === 'shooting' || page === 'rivals' || page === 'cricket' || page === 'axolotl' || page === 'iphone' || page === 'hockey' || page === 'basketball' || page === 'hotel' || page === 'lasertag' || page === 'minecraft' || page === 'jurassic' || page === 'edu';
+  const onGame = page === 'game' || page === 'soccer' || page === 'fruitninja' || page === 'reaction' || page === 'shooting' || page === 'rivals' || page === 'cricket' || page === 'axolotl' || page === 'iphone' || page === 'hockey' || page === 'basketball' || page === 'hotel' || page === 'lasertag' || page === 'minecraft' || page === 'jurassic' || page === 'edu' || page === 'rocket';
   document.getElementById('share-fab').classList.toggle('visible', onGame);
   shareOpen = false;
   document.getElementById('share-options').classList.remove('open');
@@ -1967,7 +2097,8 @@ function updateNav() {
   if (currentUser) {
     const adminBtn = currentUser.isAdmin ? `<button class="nav-btn ghost" onclick="openAdmin()">⚙ admin</button>` : '';
     nl.innerHTML = `
-      <div class="user-pill"><div class="user-dot"></div>${currentUser.username}</div>
+      <div class="user-pill" onclick="goto('profile')" style="cursor:pointer" title="view profile"><div class="user-dot"></div>${currentUser.username}</div>
+      <button class="nav-btn ghost" onclick="goto('friends')" id="friends-nav-btn">👥 friends</button>
       <button class="nav-btn ghost" onclick="goto('leaderboard')">leaderboard</button>
       <button class="nav-btn ghost" onclick="goto('community')">community</button>
       <button class="nav-btn ghost" onclick="goto('chat')">💬 chat</button>
@@ -5583,14 +5714,14 @@ async function loadChat() {
     const localUsers = getUsers();
     const isAdmin = localUsers[m.username]?.isAdmin;
     const nameColor = m.color || (isAdmin ? '#e8623a' : 'var(--muted)');
-    const adminBadge = isAdmin ? '<span style="font-size:0.65rem;background:#e8623a;color:#fff;padding:1px 5px;border-radius:4px;margin-left:4px">admin</span>' : '';
+    const adminBadge = isAdmin ? '<span style="font-size:0.6rem;background:#e8623a;color:#fff;padding:1px 4px;border-radius:3px;margin-left:3px">admin</span>' : '';
     const time = new Date(m.created_at).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-    return `<div style="display:flex;flex-direction:column;align-items:${isMe?'flex-end':'flex-start'};gap:2px">
-      <div style="font-size:0.72rem;color:${nameColor};font-weight:700;display:flex;align-items:center;gap:4px">
-        ${m.username}${adminBadge}
-        <span style="font-size:0.65rem;color:var(--muted);font-weight:400">${time}</span>
+    return `<div style="display:flex;flex-direction:column;align-items:${isMe?'flex-end':'flex-start'};gap:1px">
+      <div style="font-size:0.68rem;color:${nameColor};font-weight:700;display:flex;align-items:center;gap:3px;padding:0 4px">
+        ${isMe?'':''+m.username}${adminBadge}${isMe?'you':''}
+        <span style="font-size:0.6rem;color:var(--muted);font-weight:400">${time}</span>
       </div>
-      <div style="background:${isMe?'var(--fg)':'var(--bg)'};color:${isMe?'var(--bg)':'var(--fg)'};padding:8px 12px;border-radius:${isMe?'12px 12px 2px 12px':'12px 12px 12px 2px'};max-width:80%;font-size:0.88rem;word-break:break-word;border:1px solid ${isMe?'transparent':'var(--border)'}">
+      <div style="background:${isMe?'var(--fg)':'var(--bg)'};color:${isMe?'var(--bg)':'var(--fg)'};padding:5px 10px;border-radius:${isMe?'10px 10px 2px 10px':'10px 10px 10px 2px'};max-width:75%;font-size:0.82rem;word-break:break-word;border:1px solid ${isMe?'transparent':'var(--border)'}">
         ${escapeHtml(m.msg)}
       </div>
     </div>`;
@@ -6674,6 +6805,313 @@ function jrDraw(){
   if(jrState==='idle'||jrState==='done'){c.fillStyle='rgba(0,0,0,0.75)';c.fillRect(0,0,W,H);c.font='52px serif';c.textAlign='center';c.textBaseline='middle';c.fillText('🦖',W/2,H/2-30);c.font='bold 18px Syne,sans-serif';c.fillStyle='#ff4444';c.fillText(jrState==='done'?`code red failed! wave ${jrWave} — ${jrScore} pts`:'click start code red',W/2,H/2+24);c.textBaseline='alphabetic';}
 }
 
+/* ---- ROCKET LEAGUE ---- */
+let rlCanvas, rlCtx, rlState='idle', rlRaf=null, rlLastTs=0, rlTimerLoop=null;
+const RL_W=820, RL_H=500;
+const RL_FIELD = { x:60, y:60, w:700, h:380 };
+const RL_GOAL_W=100, RL_GOAL_H=120;
+const RL_GOALS = {
+  player: { x:RL_FIELD.x-30, y:RL_FIELD.y+RL_FIELD.h/2-RL_GOAL_H/2, w:30, h:RL_GOAL_H },
+  ai:     { x:RL_FIELD.x+RL_FIELD.w, y:RL_FIELD.y+RL_FIELD.h/2-RL_GOAL_H/2, w:30, h:RL_GOAL_H },
+};
+
+let rlPlayer, rlAI, rlBall, rlParticles=[];
+let rlKeys={}, rlScore={you:0,ai:0}, rlTime=120, rlBoost=100;
+let rlGoalFlash=0, rlGoalText='';
+
+function rlReset(keepScore) {
+  if (!keepScore) { rlScore={you:0,ai:0}; rlTime=120; }
+  rlBoost=100;
+  rlPlayer = { x:RL_FIELD.x+80, y:RL_FIELD.y+RL_FIELD.h/2, w:28, h:20, angle:-Math.PI/2, vx:0, vy:0, spd:220, boost:false };
+  rlAI     = { x:RL_FIELD.x+RL_FIELD.w-80, y:RL_FIELD.y+RL_FIELD.h/2, w:28, h:20, angle:Math.PI/2, vx:0, vy:0, spd:180 };
+  rlBall   = { x:RL_FIELD.x+RL_FIELD.w/2, y:RL_FIELD.y+RL_FIELD.h/2, r:14, vx:(Math.random()-0.5)*3, vy:(Math.random()-0.5)*3 };
+}
+
+function startRocket() {
+  if (!rlCanvas) {
+    rlCanvas = document.getElementById('rl-canvas');
+    rlCtx = rlCanvas.getContext('2d');
+    window.addEventListener('keydown', e => { rlKeys[e.key.toLowerCase()]=true; if(e.key===' ')e.preventDefault(); });
+    window.addEventListener('keyup',   e => rlKeys[e.key.toLowerCase()]=false);
+  }
+  rlReset(false); rlParticles=[];
+  rlState='running';
+  document.getElementById('rl-start-btn').textContent='playing...';
+  document.getElementById('rl-start-btn').style.background='#888';
+  clearInterval(rlTimerLoop);
+  rlTimerLoop = setInterval(()=>{
+    if(rlState!=='running') return;
+    rlTime--;
+    document.getElementById('rl-time').textContent=rlTime;
+    if(rlTime<=0) endRocket();
+  }, 1000);
+  if(rlRaf) cancelAnimationFrame(rlRaf);
+  rlLastTs=0; rlRaf=requestAnimationFrame(rlLoop);
+}
+
+function stopRocket() {
+  rlState='idle'; clearInterval(rlTimerLoop);
+  if(rlRaf) cancelAnimationFrame(rlRaf);
+  rlKeys={};
+}
+
+async function endRocket() {
+  rlState='done'; clearInterval(rlTimerLoop);
+  document.getElementById('rl-start-btn').textContent='play again';
+  document.getElementById('rl-start-btn').style.background='#0044cc';
+  const won = rlScore.you > rlScore.ai;
+  const pts = rlScore.you*300 + (won?500:0);
+  const entry={username:currentUser?currentUser.username:'guest',score:applyBoostMult(pts),date:Date.now(),dino:'🚗',game:'rocket'};
+  await saveScore(entry);
+  showToast(`${won?'you win':'AI wins'}! ${rlScore.you}-${rlScore.ai} — ${pts} pts 🚗`);
+}
+
+function rlLoop(ts) {
+  const dt=Math.min(0.05,(ts-rlLastTs)/1000); rlLastTs=ts;
+  if(rlState==='running') rlUpdate(dt);
+  rlDraw();
+  if(rlState!=='idle') rlRaf=requestAnimationFrame(rlLoop);
+}
+
+function rlClamp(car) {
+  const pad=car.w/2;
+  car.x=Math.max(RL_FIELD.x+pad, Math.min(RL_FIELD.x+RL_FIELD.w-pad, car.x));
+  car.y=Math.max(RL_FIELD.y+pad, Math.min(RL_FIELD.y+RL_FIELD.h-pad, car.y));
+}
+
+function rlUpdate(dt) {
+  // player input
+  const boosting = rlKeys[' '] && rlBoost>0;
+  const spd = boosting ? rlPlayer.spd*2.2 : rlPlayer.spd;
+  if(boosting){ rlBoost=Math.max(0,rlBoost-50*dt); }
+  else { rlBoost=Math.min(100,rlBoost+30*dt); }
+  document.getElementById('rl-boost').textContent=Math.round(rlBoost);
+
+  if(rlKeys['a']||rlKeys['arrowleft'])  rlPlayer.angle-=4.5*dt;
+  if(rlKeys['d']||rlKeys['arrowright']) rlPlayer.angle+=4.5*dt;
+  if(rlKeys['w']||rlKeys['arrowup'])   { rlPlayer.vx+=Math.cos(rlPlayer.angle)*spd*dt*5; rlPlayer.vy+=Math.sin(rlPlayer.angle)*spd*dt*5; }
+  if(rlKeys['s']||rlKeys['arrowdown']) { rlPlayer.vx-=Math.cos(rlPlayer.angle)*spd*dt*2.5; rlPlayer.vy-=Math.sin(rlPlayer.angle)*spd*dt*2.5; }
+
+  // friction
+  rlPlayer.vx*=0.82; rlPlayer.vy*=0.82;
+  rlPlayer.x+=rlPlayer.vx; rlPlayer.y+=rlPlayer.vy;
+  rlClamp(rlPlayer);
+
+  // boost particles
+  if(boosting) {
+    for(let i=0;i<3;i++) rlParticles.push({
+      x:rlPlayer.x-Math.cos(rlPlayer.angle)*14,
+      y:rlPlayer.y-Math.sin(rlPlayer.angle)*14,
+      vx:(Math.random()-0.5)*3-Math.cos(rlPlayer.angle)*4,
+      vy:(Math.random()-0.5)*3-Math.sin(rlPlayer.angle)*4,
+      color:Math.random()>0.5?'#ff6600':'#ffcc00', life:1, r:4
+    });
+  }
+
+  // AI — chases ball and tries to score
+  const aiToBallX = rlBall.x-rlAI.x, aiToBallY = rlBall.y-rlAI.y;
+  const aiDist = Math.hypot(aiToBallX,aiToBallY);
+  const aiTargetAngle = Math.atan2(aiToBallY,aiToBallX);
+  // steer toward ball
+  let angleDiff = aiTargetAngle - rlAI.angle;
+  while(angleDiff>Math.PI) angleDiff-=Math.PI*2;
+  while(angleDiff<-Math.PI) angleDiff+=Math.PI*2;
+  rlAI.angle+=Math.sign(angleDiff)*Math.min(Math.abs(angleDiff),2.5*dt);
+  if(aiDist>40){
+    rlAI.vx+=Math.cos(rlAI.angle)*rlAI.spd*dt*2.5;
+    rlAI.vy+=Math.sin(rlAI.angle)*rlAI.spd*dt*2.5;
+  }
+  rlAI.vx*=0.88; rlAI.vy*=0.88;
+  rlAI.x+=rlAI.vx; rlAI.y+=rlAI.vy;
+  rlClamp(rlAI);
+
+  // ball physics
+  rlBall.x+=rlBall.vx; rlBall.y+=rlBall.vy;
+  rlBall.vx*=0.985; rlBall.vy*=0.985;
+
+  // ball wall bouncing
+  if(rlBall.x-rlBall.r < RL_FIELD.x) { rlBall.x=RL_FIELD.x+rlBall.r; rlBall.vx=Math.abs(rlBall.vx)*1.05; }
+  if(rlBall.x+rlBall.r > RL_FIELD.x+RL_FIELD.w) { rlBall.x=RL_FIELD.x+RL_FIELD.w-rlBall.r; rlBall.vx=-Math.abs(rlBall.vx)*1.05; }
+  if(rlBall.y-rlBall.r < RL_FIELD.y) { rlBall.y=RL_FIELD.y+rlBall.r; rlBall.vy=Math.abs(rlBall.vy)*1.05; }
+  if(rlBall.y+rlBall.r > RL_FIELD.y+RL_FIELD.h) { rlBall.y=RL_FIELD.y+RL_FIELD.h-rlBall.r; rlBall.vy=-Math.abs(rlBall.vy)*1.05; }
+
+  // car-ball collision
+  [rlPlayer, rlAI].forEach(car => {
+    const dx=rlBall.x-car.x, dy=rlBall.y-car.y;
+    const dist=Math.hypot(dx,dy);
+    const minDist=rlBall.r+car.w/2+4;
+    if(dist<minDist && dist>0) {
+      const nx=dx/dist, ny=dy/dist;
+      const impact=Math.hypot(car.vx,car.vy)*1.4+3;
+      rlBall.vx+=nx*impact; rlBall.vy+=ny*impact;
+      rlBall.x=car.x+nx*minDist; rlBall.y=car.y+ny*minDist;
+      for(let i=0;i<6;i++) rlParticles.push({x:rlBall.x,y:rlBall.y,vx:(Math.random()-0.5)*8,vy:(Math.random()-0.5)*8,color:'#fff',life:1,r:3});
+    }
+  });
+
+  // goal detection
+  const g = RL_GOALS;
+  if(rlBall.x-rlBall.r < g.player.x+g.player.w && rlBall.y>g.player.y && rlBall.y<g.player.y+g.player.h) {
+    rlScore.ai++; rlGoalFlash=80; rlGoalText='AI SCORES! 😤';
+    document.getElementById('rl-ai').textContent=rlScore.ai;
+    for(let i=0;i<20;i++) rlParticles.push({x:rlBall.x,y:rlBall.y,vx:(Math.random()-0.5)*12,vy:(Math.random()-0.5)*12,color:'#ff4444',life:1,r:6});
+    setTimeout(()=>rlReset(true), 1500);
+  }
+  if(rlBall.x+rlBall.r > g.ai.x && rlBall.y>g.ai.y && rlBall.y<g.ai.y+g.ai.h) {
+    rlScore.you++; rlGoalFlash=80; rlGoalText='GOAL! 🚗💥';
+    document.getElementById('rl-you').textContent=rlScore.you;
+    for(let i=0;i<20;i++) rlParticles.push({x:rlBall.x,y:rlBall.y,vx:(Math.random()-0.5)*12,vy:(Math.random()-0.5)*12,color:'#44aaff',life:1,r:6});
+    setTimeout(()=>rlReset(true), 1500);
+  }
+
+  // particles
+  for(let i=rlParticles.length-1;i>=0;i--) {
+    const p=rlParticles[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=0.1; p.life-=0.035;
+    if(p.life<=0) rlParticles.splice(i,1);
+  }
+  if(rlGoalFlash>0) rlGoalFlash--;
+}
+
+function rlDrawCar(ctx, car, color, label) {
+  ctx.save();
+  ctx.translate(car.x, car.y);
+  ctx.rotate(car.angle);
+  // body
+  const bg = ctx.createLinearGradient(-car.w/2,-car.h/2,car.w/2,car.h/2);
+  bg.addColorStop(0, color); bg.addColorStop(1, color+'99');
+  ctx.fillStyle=bg;
+  ctx.beginPath();
+  ctx.roundRect(-car.w/2,-car.h/2,car.w,car.h,5);
+  ctx.fill();
+  // windshield
+  ctx.fillStyle='rgba(180,220,255,0.5)';
+  ctx.fillRect(2,-car.h/2+3,car.w/2-4,car.h-6);
+  // wheels
+  ctx.fillStyle='#222';
+  [[-car.w/2+2,-car.h/2-3],[car.w/2-6,-car.h/2-3],[-car.w/2+2,car.h/2+1],[car.w/2-6,car.h/2+1]].forEach(([wx,wy])=>{
+    ctx.fillRect(wx,wy,6,3);
+  });
+  // boost flame
+  if(rlKeys[' '] && car===rlPlayer && rlBoost>0) {
+    ctx.fillStyle='#ff6600';
+    ctx.beginPath(); ctx.moveTo(-car.w/2,-4); ctx.lineTo(-car.w/2-12,0); ctx.lineTo(-car.w/2,4); ctx.fill();
+    ctx.fillStyle='#ffcc00';
+    ctx.beginPath(); ctx.moveTo(-car.w/2,-2); ctx.lineTo(-car.w/2-7,0); ctx.lineTo(-car.w/2,2); ctx.fill();
+  }
+  ctx.restore();
+  // label
+  ctx.font='bold 10px Syne,sans-serif'; ctx.fillStyle='#fff'; ctx.textAlign='center';
+  ctx.fillText(label, car.x, car.y-car.h/2-6);
+}
+
+function rlDraw() {
+  if(!rlCtx) return;
+  const c=rlCtx, W=RL_W, H=RL_H;
+  // bg
+  c.fillStyle='#0a0a1a'; c.fillRect(0,0,W,H);
+  // stadium crowd (simple)
+  c.fillStyle='#151530'; c.fillRect(0,0,W,H);
+  for(let i=0;i<80;i++){
+    c.fillStyle=`hsl(${220+Math.sin(i)*30},40%,${15+Math.sin(i*0.7)*5}%)`;
+    c.fillRect(Math.sin(i*17)*W,Math.cos(i*13)*H,8,8);
+  }
+
+  // field
+  const fg=c.createLinearGradient(RL_FIELD.x,RL_FIELD.y,RL_FIELD.x,RL_FIELD.y+RL_FIELD.h);
+  fg.addColorStop(0,'#1a3a1a'); fg.addColorStop(0.5,'#1e4a1e'); fg.addColorStop(1,'#1a3a1a');
+  c.fillStyle=fg; c.fillRect(RL_FIELD.x,RL_FIELD.y,RL_FIELD.w,RL_FIELD.h);
+
+  // field stripes
+  for(let i=0;i<7;i++){
+    c.fillStyle=i%2?'rgba(255,255,255,0.02)':'rgba(0,0,0,0.02)';
+    c.fillRect(RL_FIELD.x+i*(RL_FIELD.w/7),RL_FIELD.y,RL_FIELD.w/7,RL_FIELD.h);
+  }
+
+  // field lines
+  c.strokeStyle='rgba(255,255,255,0.3)'; c.lineWidth=2;
+  c.strokeRect(RL_FIELD.x,RL_FIELD.y,RL_FIELD.w,RL_FIELD.h);
+  // centre line
+  c.beginPath(); c.moveTo(RL_FIELD.x+RL_FIELD.w/2,RL_FIELD.y); c.lineTo(RL_FIELD.x+RL_FIELD.w/2,RL_FIELD.y+RL_FIELD.h); c.stroke();
+  // centre circle
+  c.beginPath(); c.arc(RL_FIELD.x+RL_FIELD.w/2,RL_FIELD.y+RL_FIELD.h/2,60,0,Math.PI*2); c.stroke();
+  // boost pads
+  const boostPads=[[RL_FIELD.x+120,RL_FIELD.y+90],[RL_FIELD.x+RL_FIELD.w-120,RL_FIELD.y+90],[RL_FIELD.x+120,RL_FIELD.y+RL_FIELD.h-90],[RL_FIELD.x+RL_FIELD.w-120,RL_FIELD.y+RL_FIELD.h-90],[RL_FIELD.x+RL_FIELD.w/2,RL_FIELD.y+90],[RL_FIELD.x+RL_FIELD.w/2,RL_FIELD.y+RL_FIELD.h-90]];
+  boostPads.forEach(([bx,by])=>{
+    c.fillStyle='rgba(255,180,0,0.3)'; c.strokeStyle='#ff9900'; c.lineWidth=2;
+    c.beginPath(); c.arc(bx,by,12,0,Math.PI*2); c.fill(); c.stroke();
+    c.font='10px serif'; c.textAlign='center'; c.textBaseline='middle'; c.fillStyle='#ffcc00';
+    c.fillText('⚡',bx,by);
+  });
+  c.textBaseline='alphabetic';
+
+  // goals
+  c.fillStyle='rgba(100,100,255,0.25)';
+  c.fillRect(RL_GOALS.player.x,RL_GOALS.player.y,RL_GOALS.player.w,RL_GOALS.player.h);
+  c.fillStyle='rgba(255,100,100,0.25)';
+  c.fillRect(RL_GOALS.ai.x,RL_GOALS.ai.y,RL_GOALS.ai.w,RL_GOALS.ai.h);
+  c.strokeStyle='#fff'; c.lineWidth=3;
+  c.strokeRect(RL_GOALS.player.x,RL_GOALS.player.y,RL_GOALS.player.w,RL_GOALS.player.h);
+  c.strokeRect(RL_GOALS.ai.x,RL_GOALS.ai.y,RL_GOALS.ai.w,RL_GOALS.ai.h);
+  // goal labels
+  c.font='bold 10px Syne,sans-serif'; c.fillStyle='rgba(255,255,255,0.5)'; c.textAlign='center';
+  c.fillText('YOUR\nGOAL',RL_GOALS.player.x+15,RL_GOALS.player.y-8);
+  c.fillText('AI\nGOAL',RL_GOALS.ai.x+15,RL_GOALS.ai.y-8);
+
+  // particles
+  rlParticles.forEach(p=>{ c.globalAlpha=p.life; c.fillStyle=p.color; c.beginPath(); c.arc(p.x,p.y,p.r*p.life,0,Math.PI*2); c.fill(); }); c.globalAlpha=1;
+
+  // cars
+  if(rlPlayer) rlDrawCar(c, rlPlayer, '#4488ff', 'YOU');
+  if(rlAI)     rlDrawCar(c, rlAI,     '#ff4444', 'AI');
+
+  // ball
+  if(rlBall){
+    c.shadowColor='#fff'; c.shadowBlur=10;
+    c.fillStyle='#fff'; c.beginPath(); c.arc(rlBall.x,rlBall.y,rlBall.r,0,Math.PI*2); c.fill();
+    c.shadowBlur=0;
+    // ball pattern
+    c.strokeStyle='#aaa'; c.lineWidth=1;
+    c.beginPath(); c.arc(rlBall.x,rlBall.y,rlBall.r,0,Math.PI*2); c.stroke();
+    c.beginPath(); c.moveTo(rlBall.x-rlBall.r,rlBall.y); c.lineTo(rlBall.x+rlBall.r,rlBall.y); c.stroke();
+    c.beginPath(); c.moveTo(rlBall.x,rlBall.y-rlBall.r); c.lineTo(rlBall.x,rlBall.y+rlBall.r); c.stroke();
+  }
+
+  // boost bar
+  const bpct=rlBoost/100;
+  c.fillStyle='rgba(0,0,0,0.5)'; c.fillRect(14,H-26,120,10);
+  c.fillStyle=bpct>0.5?'#ff9900':bpct>0.25?'#ffcc00':'#ff4400';
+  c.fillRect(14,H-26,120*bpct,10);
+  c.font='10px monospace'; c.fillStyle='#fff'; c.textAlign='left';
+  c.fillText('⚡ BOOST',14,H-30);
+
+  // controls hint
+  c.font='11px Syne,sans-serif'; c.fillStyle='rgba(255,255,255,0.3)'; c.textAlign='right';
+  c.fillText('WASD=drive · SPACE=boost',W-14,H-12);
+
+  // goal flash
+  if(rlGoalFlash>0){
+    c.fillStyle=`rgba(255,255,255,${(rlGoalFlash/80)*0.15})`; c.fillRect(0,0,W,H);
+    c.font='bold 48px Syne,sans-serif'; c.fillStyle='#f9c74f';
+    c.textAlign='center'; c.textBaseline='middle';
+    c.shadowColor='#f9c74f'; c.shadowBlur=20;
+    c.fillText(rlGoalText,W/2,H/2);
+    c.shadowBlur=0; c.textBaseline='alphabetic';
+  }
+
+  // idle/done overlay
+  if(rlState==='idle'||rlState==='done'){
+    c.fillStyle='rgba(0,0,0,0.7)'; c.fillRect(0,0,W,H);
+    c.font='52px serif'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('🚗',W/2,H/2-40);
+    c.font='bold 22px Syne,sans-serif'; c.fillStyle='#44aaff';
+    c.fillText(rlState==='done'?`${rlScore.you}-${rlScore.ai} — game over!`:'click start to play',W/2,H/2+20);
+    if(rlState==='done'){
+      c.font='14px Syne,sans-serif'; c.fillStyle='rgba(255,255,255,0.4)';
+      c.fillText(rlScore.you>rlScore.ai?'🏆 you win!':'AI wins this time 😤',W/2,H/2+52);
+    }
+    c.textBaseline='alphabetic';
+  }
+}
+
 /* ---- BETTER SOCCER PENALTY FX ---- */
 const SC_EFFECTS = [];
 function scAddEffect(type, x, y, msg) {
@@ -6705,6 +7143,282 @@ function scDrawEffects(ctx) {
     ctx.globalAlpha = 1;
   }
 }
+
+/* ---- PROFILE / USERNAME CHANGE ---- */
+async function loadProfilePage() {
+  if (!currentUser) { goto('auth'); return; }
+  const el = document.getElementById('profile-username-display');
+  const se = document.getElementById('profile-score-display');
+  if (el) el.textContent = currentUser.username;
+  // fetch score from Supabase
+  const scores = await sbGet('leaderboard', `username=eq.${encodeURIComponent(currentUser.username)}&select=score`) || [];
+  const total = scores.reduce((s, r) => s + (Number(r.score)||0), 0);
+  if (se) se.textContent = `${total.toLocaleString()} total pts`;
+  const input = document.getElementById('new-username-input');
+  if (input) input.value = '';
+  const errEl = document.getElementById('username-change-error');
+  if (errEl) errEl.style.display = 'none';
+}
+
+async function changeUsername() {
+  if (!currentUser) return;
+  const input = document.getElementById('new-username-input');
+  const errEl = document.getElementById('username-change-error');
+  const newName = input.value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
+  if (!newName || newName.length < 3) { showUsernameErr('username must be at least 3 characters'); return; }
+  if (newName.length > 20) { showUsernameErr('username must be 20 characters or less'); return; }
+  if (newName === currentUser.username) { showUsernameErr("that's already your username!"); return; }
+
+  // check if taken in Supabase
+  const existing = await sbGet('players', `username=eq.${encodeURIComponent(newName)}&select=username`);
+  if (existing && existing.length) { showUsernameErr('username already taken — try another'); return; }
+  // check localStorage
+  const users = getUsers();
+  if (users[newName]) { showUsernameErr('username already taken — try another'); return; }
+
+  const oldName = currentUser.username;
+
+  // update Supabase leaderboard rows
+  await sbUpdate('leaderboard', { username: oldName }, { username: newName });
+  // update Supabase players table
+  await sbInsert('players', { username: newName });
+  await sbDelete('players', `username=eq.${encodeURIComponent(oldName)}`);
+
+  // update localStorage
+  if (users[oldName]) {
+    users[newName] = users[oldName];
+    delete users[oldName];
+    saveUsers(users);
+  }
+  // update local scores
+  let scores = JSON.parse(localStorage.getItem('melolo_scores') || '[]');
+  scores = scores.map(s => s.username === oldName ? { ...s, username: newName } : s);
+  localStorage.setItem('melolo_scores', JSON.stringify(scores));
+  highScores = scores;
+
+  // update current session
+  currentUser.username = newName;
+  updateNav();
+  loadProfilePage();
+  if (errEl) errEl.style.display = 'none';
+  showToast(`username changed to ${newName}! 🎉`);
+}
+
+function showUsernameErr(msg) {
+  const el = document.getElementById('username-change-error');
+  if (el) { el.textContent = msg; el.style.display = 'block'; }
+}
+
+function changePassword() {
+  if (!currentUser) return;
+  const input = document.getElementById('new-pass-input');
+  const newPass = input.value.trim();
+  if (!newPass || newPass.length < 6) { showToast('password must be at least 6 characters'); return; }
+  const users = getUsers();
+  if (!users[currentUser.username]) { showToast('account not found locally — sign up again'); return; }
+  users[currentUser.username].password = newPass;
+  saveUsers(users);
+  input.value = '';
+  showToast('password updated! ✅');
+}
+
+async function confirmDeleteOwnAccount() {
+  if (!currentUser) return;
+  const username = currentUser.username;
+  // use the built-in confirm dialog
+  showConfirm(
+    'delete your account?',
+    `this will permanently delete ${username} and all your scores. cannot be undone.`,
+    async () => {
+      await sbDelete('leaderboard', `username=eq.${encodeURIComponent(username)}`);
+      await sbDelete('players', `username=eq.${encodeURIComponent(username)}`);
+      const users = getUsers();
+      delete users[username];
+      saveUsers(users);
+      let scores = JSON.parse(localStorage.getItem('melolo_scores') || '[]');
+      scores = scores.filter(s => s.username !== username);
+      localStorage.setItem('melolo_scores', JSON.stringify(scores));
+      highScores = scores;
+      logout();
+      showToast('account deleted. goodbye 👋');
+    }
+  );
+}
+
+/* ---- FRIENDS SYSTEM ---- */
+let friendsPollInterval = null;
+
+async function loadFriendsPage() {
+  if (!currentUser) { goto('auth'); return; }
+  await updatePresence();
+  await renderFriendsList();
+  clearInterval(friendsPollInterval);
+  friendsPollInterval = setInterval(async () => {
+    await updatePresence();
+    await renderFriendsList();
+  }, 10000);
+}
+
+async function updatePresence() {
+  if (!currentUser) return;
+  try {
+    await sbUpsert('presence', {
+      username: currentUser.username,
+      status: 'online',
+      current_game: currentPage || 'lobby',
+      last_seen: new Date().toISOString()
+    });
+  } catch(e) {}
+}
+
+async function sendFriendRequest() {
+  if (!currentUser) { showToast('log in first!'); goto('auth'); return; }
+  const input = document.getElementById('friend-add-input');
+  const target = input.value.trim().toLowerCase();
+  if (!target) return;
+  if (target === currentUser.username) { showToast("you can't add yourself 😅"); return; }
+
+  // check user exists
+  const exists = await sbGet('players', `username=eq.${encodeURIComponent(target)}&select=username`);
+  if (!exists || !exists.length) { showToast('user not found!'); return; }
+
+  // check not already friends/pending
+  const existing = await sbGet('friends', `from_user=eq.${encodeURIComponent(currentUser.username)}&to_user=eq.${encodeURIComponent(target)}&select=status`);
+  if (existing && existing.length) { showToast(`already ${existing[0].status}!`); return; }
+
+  await sbInsert('friends', { from_user: currentUser.username, to_user: target, status: 'pending' });
+  input.value = '';
+  showToast(`friend request sent to ${target}! 📨`);
+  renderFriendsList();
+}
+
+async function acceptFriend(fromUser) {
+  await sbUpdate('friends', { from_user: fromUser, to_user: currentUser.username }, { status: 'accepted' });
+  // create reverse entry too
+  await sbInsert('friends', { from_user: currentUser.username, to_user: fromUser, status: 'accepted' });
+  showToast(`you and ${fromUser} are now friends! 🎉`);
+  renderFriendsList();
+}
+
+async function declineFriend(fromUser) {
+  await sbDelete('friends', `from_user=eq.${encodeURIComponent(fromUser)}&to_user=eq.${encodeURIComponent(currentUser.username)}`);
+  showToast('request declined');
+  renderFriendsList();
+}
+
+async function removeFriend(username) {
+  await sbDelete('friends', `from_user=eq.${encodeURIComponent(currentUser.username)}&to_user=eq.${encodeURIComponent(username)}`);
+  await sbDelete('friends', `from_user=eq.${encodeURIComponent(username)}&to_user=eq.${encodeURIComponent(currentUser.username)}`);
+  showToast(`removed ${username} from friends`);
+  renderFriendsList();
+}
+
+async function joinFriendGame(username) {
+  const presence = await sbGet('presence', `username=eq.${encodeURIComponent(username)}&select=current_game,last_seen`);
+  if (!presence || !presence.length) { showToast(`${username} is not online`); return; }
+  const p = presence[0];
+  const lastSeen = new Date(p.last_seen).getTime();
+  if (Date.now() - lastSeen > 60000) { showToast(`${username} appears offline`); return; }
+  const game = p.current_game;
+  if (!game || game === 'lobby') { showToast(`${username} is in the lobby, not in a game`); return; }
+  showToast(`joining ${username}'s game: ${game}! 🎮`);
+  goto(game);
+}
+
+async function challengeFriend(username) {
+  // send a challenge via chat
+  if (!currentUser) return;
+  await sbInsert('chat', { username: currentUser.username, msg: `🎮 @${username} I challenge you! join my server!`, color: '#e8c84a' });
+  showToast(`challenge sent to ${username}! 🎮`);
+}
+
+async function renderFriendsList() {
+  if (!currentUser) return;
+  const me = currentUser.username;
+
+  // get all my friend rows
+  const allFriends = await sbGet('friends', `from_user=eq.${encodeURIComponent(me)}`) || [];
+  const pending = await sbGet('friends', `to_user=eq.${encodeURIComponent(me)}&status=eq.pending`) || [];
+
+  // pending requests section
+  const reqSection = document.getElementById('friend-requests-section');
+  const reqList = document.getElementById('friend-requests-list');
+  if (pending.length && reqSection && reqList) {
+    reqSection.style.display = '';
+    reqList.innerHTML = pending.map(r => `
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:0.9rem;font-weight:700;flex:1">👤 ${r.from_user}</span>
+        <button onclick="acceptFriend('${r.from_user}')" style="padding:5px 12px;background:#44aa66;color:#fff;border:none;border-radius:6px;font-family:Syne,sans-serif;font-weight:700;cursor:pointer;font-size:0.8rem">accept</button>
+        <button onclick="declineFriend('${r.from_user}')" style="padding:5px 12px;background:none;border:1.5px solid var(--border);border-radius:6px;font-family:Syne,sans-serif;font-weight:700;cursor:pointer;font-size:0.8rem;color:var(--muted)">decline</button>
+      </div>`).join('');
+  } else if (reqSection) reqSection.style.display = 'none';
+
+  // accepted friends
+  const accepted = allFriends.filter(f => f.status === 'accepted');
+  const friendsList = document.getElementById('friends-list');
+  if (!friendsList) return;
+
+  if (!accepted.length && !pending.length) {
+    friendsList.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;text-align:center;padding:20px">no friends yet — add someone by username! 👥</div>';
+    return;
+  }
+
+  // get presence for all friends
+  const usernames = accepted.map(f => f.to_user);
+  let presenceData = [];
+  if (usernames.length) {
+    presenceData = await sbGet('presence', `username=in.(${usernames.map(u=>encodeURIComponent(u)).join(',')})`) || [];
+  }
+
+  const onlineCount = presenceData.filter(p => Date.now() - new Date(p.last_seen).getTime() < 60000).length;
+  const countEl = document.getElementById('friends-online-count');
+  if (countEl) countEl.textContent = onlineCount ? `${onlineCount} online` : '';
+
+  // pending sent
+  const sentPending = allFriends.filter(f => f.status === 'pending');
+
+  friendsList.innerHTML = [
+    ...accepted.map(f => {
+      const p = presenceData.find(pr => pr.username === f.to_user);
+      const isOnline = p && Date.now() - new Date(p.last_seen).getTime() < 60000;
+      const inGame = isOnline && p.current_game && p.current_game !== 'lobby';
+      return `<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+        <div style="width:10px;height:10px;border-radius:50%;background:${isOnline?'#44aa66':'#888'};flex-shrink:0"></div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:0.9rem">${f.to_user}</div>
+          <div style="font-size:0.72rem;color:var(--muted)">${isOnline?(inGame?'playing: '+p.current_game:'in lobby'):'offline'}</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          ${inGame?`<button onclick="joinFriendGame('${f.to_user}')" style="padding:4px 10px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:Syne,sans-serif;font-size:0.75rem;font-weight:700;cursor:pointer">join</button>`:''}
+          <button onclick="challengeFriend('${f.to_user}')" style="padding:4px 10px;background:none;border:1.5px solid var(--border);border-radius:6px;font-family:Syne,sans-serif;font-size:0.75rem;font-weight:700;cursor:pointer;color:var(--fg)">⚔️</button>
+          <button onclick="removeFriend('${f.to_user}')" style="padding:4px 10px;background:none;border:1.5px solid var(--border);border-radius:6px;font-family:Syne,sans-serif;font-size:0.75rem;cursor:pointer;color:var(--muted)">✕</button>
+        </div>
+      </div>`;
+    }),
+    ...sentPending.map(f => `<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:10px;border:1px solid var(--border);opacity:0.6">
+      <div style="width:10px;height:10px;border-radius:50%;background:#e8c84a;flex-shrink:0"></div>
+      <div style="flex:1"><div style="font-weight:700;font-size:0.9rem">${f.to_user}</div><div style="font-size:0.72rem;color:var(--muted)">request pending...</div></div>
+      <button onclick="declineFriend('${f.to_user}')" style="padding:4px 10px;background:none;border:1.5px solid var(--border);border-radius:6px;font-family:Syne,sans-serif;font-size:0.75rem;cursor:pointer;color:var(--muted)">cancel</button>
+    </div>`)
+  ].join('');
+}
+
+// track current page for presence
+let currentPage = 'lobby';
+const _origGoto = window.goto;
+// presence update on page change handled inline in goto below
+
+// update presence every 30s while on site
+setInterval(() => { if (currentUser) updatePresence().catch(()=>{}); }, 30000);
+
+// show friend request badge on nav
+async function checkFriendRequests() {
+  if (!currentUser) return;
+  const pending = await sbGet('friends', `to_user=eq.${encodeURIComponent(currentUser.username)}&status=eq.pending`) || [];
+  const btn = document.getElementById('friends-nav-btn');
+  if (btn) btn.textContent = pending.length ? `👥 friends (${pending.length})` : '👥 friends';
+}
+setInterval(checkFriendRequests, 15000);
 
 /* ---- SHARE ---- */
 let shareOpen = false;
@@ -7317,27 +8031,35 @@ async function adminUnban(username) {
   showToast(`${username} unbanned ✅`);
 }
 
-function adminResetScore(username) {
+async function adminResetScore(username) {
   showConfirm(
     `reset ${username}'s scores?`,
     `all scores for ${username} will be permanently deleted from the leaderboard.`,
-    () => {
+    async () => {
+      // delete from Supabase
+      await sbDelete('leaderboard', `username=eq.${encodeURIComponent(username)}`);
+      // delete from localStorage
       let scores = JSON.parse(localStorage.getItem('melolo_scores') || '[]');
       scores = scores.filter(s => s.username !== username);
       localStorage.setItem('melolo_scores', JSON.stringify(scores));
       highScores = scores;
-      renderAdminTable(document.querySelector('.admin-search').value);
+      renderAdminTable(document.querySelector('.admin-search')?.value || '');
       renderAdminStats();
-      showToast(`${username}'s scores have been reset`);
+      showToast(`${username}'s scores reset ✅`);
     }
   );
 }
 
-function adminDelete(username) {
+async function adminDelete(username) {
   showConfirm(
     `delete ${username}?`,
-    `this will permanently delete the account and all scores for ${username}. this cannot be undone.`,
-    () => {
+    `this will permanently delete the account and all scores for ${username}. cannot be undone.`,
+    async () => {
+      // delete scores from Supabase
+      await sbDelete('leaderboard', `username=eq.${encodeURIComponent(username)}`);
+      // delete from players table
+      await sbDelete('players', `username=eq.${encodeURIComponent(username)}`);
+      // delete locally
       const users = getUsers();
       delete users[username];
       saveUsers(users);
@@ -7349,9 +8071,9 @@ function adminDelete(username) {
       localStorage.setItem('melolo_scores', JSON.stringify(scores));
       highScores = scores;
       if (currentUser?.username === username) logout();
-      renderAdminTable(document.querySelector('.admin-search').value);
+      renderAdminTable(document.querySelector('.admin-search')?.value || '');
       renderAdminStats();
-      showToast(`${username} has been deleted 🗑`);
+      showToast(`${username} deleted 🗑`);
     }
   );
 }
@@ -7417,17 +8139,23 @@ function closeEditScore() {
   editScoreTarget = null;
 }
 
-function confirmEditScore() {
+async function confirmEditScore() {
   const val = parseInt(document.getElementById('edit-score-input').value, 10);
   if (isNaN(val) || val < 0) { showToast('enter a valid score!'); return; }
   const username = editScoreTarget;
 
-  // wipe existing scores for this user and insert one adjusted entry
+  // delete existing scores from Supabase
+  await sbDelete('leaderboard', `username=eq.${encodeURIComponent(username)}`);
+
+  // insert new adjusted score to Supabase
+  if (val > 0) {
+    await sbInsert('leaderboard', { username, score: val, game: 'admin', dino: '⭐' });
+  }
+
+  // also update localStorage
   let scores = JSON.parse(localStorage.getItem('melolo_scores') || '[]');
   scores = scores.filter(s => s.username !== username);
-  if (val > 0) {
-    scores.push({ username, score: val, date: Date.now(), dino: '⭐', game: 'admin' });
-  }
+  if (val > 0) scores.push({ username, score: val, date: Date.now(), dino: '⭐', game: 'admin' });
   scores.sort((a,b) => b.score - a.score);
   localStorage.setItem('melolo_scores', JSON.stringify(scores));
   highScores = scores;
